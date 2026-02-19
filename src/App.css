@@ -17,3 +17,9 @@ body {
 .map-container {
   width: 65%;
 }
+
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
