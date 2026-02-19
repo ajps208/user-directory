@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { UserList } from "./components/UserList";
 
 function App() {
   // State variables
@@ -9,6 +10,7 @@ function App() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   // Fetching data for users
   useEffect(() => {
@@ -49,17 +51,24 @@ function App() {
           onChange={(e) => setSearch(e.target.value)}
           className="search"
         />
-
+        
+        {/* loading */}
         {loading && <p>Loading users...</p>}
-        {filteredUsers.length === 0 && <p>No users found.</p>}
+        {/* error */}
+        {error && <p className="error">{error}</p>}
+         
+        {/* user list */}
+        {!loading && !error && (
+          <UserList
+            users={filteredUsers}
+            onSelect={setSelectedUser}
+            selectedUser={selectedUser}
+          />
+        )}
 
-        {error && <p>{error}</p>}
-
-        {filteredUsers.map((user) => (
-          <div key={user.id}>
-            <p>{user.name}</p>
-          </div>
-        ))}
+        {/* no users */}
+        {!loading && filteredUsers.length === 0 && <p>No users found.</p>}
+        
       </div>
 
       {/* Map */}
