@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import { UserList } from "./components/UserList";
-import {MapView} from "./components/MapView";
+import { MapView } from "./components/MapView";
+import "./App.css";
 
 function App() {
   // State variables
-
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [search, setSearch] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
 
-  // Fetching data for users
+  // Fetch users from API
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
@@ -22,6 +21,7 @@ function App() {
       })
       .then((data) => {
         setUsers(data);
+        setFilteredUsers(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -30,7 +30,7 @@ function App() {
       });
   }, []);
 
-  // Filtering users
+  // Filter users based on search
   useEffect(() => {
     const filtered = users.filter((user) =>
       user.name.toLowerCase().includes(search.toLowerCase()),
@@ -42,23 +42,41 @@ function App() {
     <div className="container">
       {/* Sidebar */}
       <div className="sidebar">
-        <h2>User Directory</h2>
+        <div className="header-left">
+          <span className="header-logo">◈</span>
+          <h1 className="header-title">USER DIRECTORY</h1>
+        </div>
 
-        {/* search bar */}
+        {/* Search input */}
         <input
           type="text"
-          placeholder="Search by name..."
+          placeholder="🔍  Search by Name ..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="search"
         />
 
-        {/* loading */}
-        {loading && <p>Loading users...</p>}
-        {/* error */}
-        {error && <p className="error">{error}</p>}
+        {/* Loading and error messages */}
+        {loading && (
+          <div className="center-state">
+            <p>Loading users...</p>
+          </div>
+        )}
 
-        {/* user list */}
+        {error && (
+          <div className="center-state">
+            <p className="error">{error}</p>
+          </div>
+        )}
+
+        {/* No users found message */}
+        {!loading && !error && filteredUsers.length === 0 && (
+          <div className="center-state">
+            <p className="empty">No users found.</p>
+          </div>
+        )}
+
+        {/* User list */}
         {!loading && !error && (
           <UserList
             users={filteredUsers}
@@ -66,16 +84,15 @@ function App() {
             selectedUser={selectedUser}
           />
         )}
-
-        {/* no users */}
-        {!loading && filteredUsers.length === 0 && <p>No users found.</p>}
       </div>
 
-      {/* Map */}
+      {/* Map view */}
       <div className="map-container">
-        <MapView users={filteredUsers}
+        <MapView
+          users={filteredUsers}
           selectedUser={selectedUser}
-          onSelect={setSelectedUser} />
+          onSelect={setSelectedUser}
+        />
       </div>
     </div>
   );
