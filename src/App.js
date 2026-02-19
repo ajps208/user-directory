@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { UserList } from "./components/UserList";
+import { MapView } from "./components/MapView";
 
 function App() {
   // State variables
@@ -51,12 +52,12 @@ function App() {
           onChange={(e) => setSearch(e.target.value)}
           className="search"
         />
-        
+
         {/* loading */}
         {loading && <p>Loading users...</p>}
         {/* error */}
         {error && <p className="error">{error}</p>}
-         
+
         {/* user list */}
         {!loading && !error && (
           <UserList
@@ -68,12 +69,11 @@ function App() {
 
         {/* no users */}
         {!loading && filteredUsers.length === 0 && <p>No users found.</p>}
-        
       </div>
 
       {/* Map */}
       <div className="map-container">
-        <p>Map will appear here</p>
+        <MapView users={filteredUsers} />
       </div>
     </div>
   );
