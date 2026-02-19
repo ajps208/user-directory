@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { UserList } from "./components/UserList";
-import { MapView } from "./components/MapView";
+import {MapView} from "./components/MapView";
 
 function App() {
   // State variables
@@ -73,7 +73,9 @@ function App() {
 
       {/* Map */}
       <div className="map-container">
-        <MapView users={filteredUsers} />
+        <MapView users={filteredUsers}
+          selectedUser={selectedUser}
+          onSelect={setSelectedUser} />
       </div>
     </div>
   );
