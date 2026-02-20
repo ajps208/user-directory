@@ -8,8 +8,13 @@
 
 body {
   margin: 0;
-  background: #f4f6f9;
-  color: #1f2937;
+  background: #0b0f0d;
+  color: #e5e7eb;
+  font-family:
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 /* ------------------------
@@ -21,25 +26,24 @@ body {
   height: 100vh;
   padding: 20px;
   gap: 20px;
-  background: linear-gradient(145deg, #0f172a, #1e293b);
+  background: linear-gradient(145deg, #0b0f0d, #111513);
 }
 
 .sidebar {
-  width: 34%;
-  background: #ffffff;
+  width: 32%;
+  background: #121716;
   padding: 20px;
   display: flex;
   flex-direction: column;
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #1f2a26;
 }
 
 .map-container {
-  width: 66%;
-  position: relative;
+  width: 68%;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #1f2a26;
 }
 
 /* ------------------------
@@ -54,32 +58,36 @@ body {
 }
 
 .header-logo {
-  font-size: 20px;
-  color: #06b6d4;
-}
-.header-title {
   font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.15em;
+  color: #a3ff12;
+}
+
+.header-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #54e407;
 }
 
 /* ------------------------
-   SEARCH INPUT
+   SEARCH
 ------------------------ */
 
 .search {
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid #a1a3a6;
-  font-size: 13px;
+  border: 1px solid #1f2a26;
+  background: #0f1413;
+  color: #fff;
+  font-size: 12px;
   outline: none;
-  transition: all 0.25s ease;
   margin-bottom: 16px;
+  transition: 0.3s ease;
 }
 
 .search:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  border-color: #a3ff12;
+  box-shadow: 0 0 0 2px rgba(163, 255, 18, 0.2);
 }
 
 /* ------------------------
@@ -90,7 +98,7 @@ body {
   overflow-y: auto;
   flex: 1;
   padding-right: 4px;
-  margin-top: 8px;
+  scroll-snap-type: y mandatory;
 }
 
 .user-list::-webkit-scrollbar {
@@ -98,86 +106,92 @@ body {
 }
 
 .user-list::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #1f2a26;
   border-radius: 10px;
 }
 
 /* ------------------------
-   USER CARD 
-- ----------------------*/
+   USER CARD
+------------------------ */
 
 .user-card {
-  background: #ffffff;
-  padding: 10px 14px;
-  border-radius: 14px;
-  border: 1px solid #a1a3a6;
+  background: #0f1413;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #1f2a26;
   margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.25s ease;
+  scroll-snap-align: start;
 }
 
-/* Layout */
 .user-card-content {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* Avatar */
+
 .avatar {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #a3ff12;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: #fff;
-  font-weight: 600;
-  font-size: 14px;
+  background: #1f2a26;
+  color: #a3ff12;
+  font-weight: 700;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.25s ease;
 }
 
 /* User Info */
+
 .user-info h4 {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
+  color: #ffffff;
 }
 
 .user-info p {
   margin: 2px 0 0;
-  font-size: 12px;
-  color: #6b7280;
+  font-size: 11px;
+  color: #9ca3af;
 }
 
 .user-info small {
-  font-size: 11px;
-  color: #3b82f6;
-  font-weight: 500;
+  font-size: 10px;
+  color: #a3ff12;
+  font-weight: 600;
 }
 
 /* Hover */
+
 .user-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  border-color: #3b82f6;
+  border-color: #131b18;
+  background: #131b18;
 }
 
 /* Active */
+
 .user-card.active {
-  background: #f0f9ff;
-  border-color: #3b82f6;
+  border-color: #a3ff12;
+  background: #1a241f;
+  box-shadow: 0 0 10px rgba(163, 255, 18, 0.15);
 }
 
 .user-card.active .avatar {
-  transform: scale(1.08);
+  background: #a3ff12;
+  color: #000;
 }
 
 /* ------------------------
-   EMPTY / ERROR
----------------------- */
+   STATES
+------------------------ */
 
 .center-state {
   flex: 1;
@@ -191,21 +205,21 @@ body {
   text-align: center;
   padding: 30px 10px;
   color: #6b7280;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .error {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: #2b1212;
+  color: #ff4d4d;
   padding: 10px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 12px;
   margin-bottom: 10px;
 }
 
 /* ------------------------
    MAP
---------------------------- */
+------------------------ */
 
 .leaflet-container {
   height: 100%;
@@ -215,7 +229,7 @@ body {
 
 /* ------------------------
    POPUP
---------------------------- */
+------------------------ */
 
 .popup-content {
   display: flex;
@@ -227,35 +241,20 @@ body {
 .popup-name {
   font-size: 13px;
   font-weight: 700;
-  color: #1f2937;
-}
-
-.popup-email {
-  font-size: 11px;
-  color: #6b7280;
-}
-
-.popup-city,
-.popup-coords {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
+  color: #000;
 }
 
 .popup-city-label,
 .popup-coords-label {
-  color: #3b82f6;
+  color: #16a34a;
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
-  min-width: 36px;
 }
 
-/* -------------------------
+/* ------------------------
    RESPONSIVE
-------------------------- */
+------------------------ */
 
 @media (max-width: 768px) {
   .container {
@@ -274,3 +273,4 @@ body {
     height: 50vh;
   }
 }
+ 

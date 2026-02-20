@@ -59,7 +59,7 @@ function App() {
         {/* Loading and error messages */}
         {loading && (
           <div className="center-state">
-            <p>Loading users...</p>
+            <p className="empty">Loading users...</p>
           </div>
         )}
 

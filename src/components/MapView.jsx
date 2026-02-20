@@ -64,11 +64,11 @@ export const MapView = ({ users, selectedUser, onSelect }) => {
                 <div className="popup-name">{user.name}</div>
                 <div className="popup-email">{user.email}</div>
                 <div className="popup-city">
-                  <span className="popup-city-label">City</span>
-                  <span>{user.address.city}</span>
+                  <span className="popup-city-label">City :</span>
+                  <span> {user.address.city}</span>
                 </div>
                 <div className="popup-coords">
-                  <span className="popup-coords-label">Coords</span>
+                  <span className="popup-coords-label">Coords : </span>
                   <span className="popup-coords-val">
                     {parseFloat(user.address.geo.lat).toFixed(4)},&nbsp;
                     {parseFloat(user.address.geo.lng).toFixed(4)}
